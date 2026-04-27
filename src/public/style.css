@@ -376,6 +376,11 @@ footer {
     padding: 20px;
     margin-top: 50px;
     font-size: 0.9em;
+    
+    a{
+        color:white;
+        font-size: large;
+    }
 }
 
 /* ========================================
