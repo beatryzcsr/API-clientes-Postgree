@@ -1,13 +1,13 @@
-const ClienteModel = require('../models/clientesModel');
+const ProdutoModel = require('../models/produtosModel');
 
 //rota get geral
 async function listarTodos(req, res) {
   try {
-    const clientes = await ClienteModel.listarTodos();
-    res.status(200).json(clientes);
+    const produtos = await ProdutoModel.listarTodos();
+    res.status(200).json(produtos);
   } catch (erro) {
     res.status(500).json({ 
-      mensagem: 'Erro ao listar clientes', 
+      mensagem: 'Erro ao listar produtos', 
       erro: erro.message 
     });
   }
@@ -24,18 +24,18 @@ async function buscarPorId(req, res) {
       });
     }
     
-    const cliente = await ClienteModel.buscarPorId(id);
+    const produtos = await ProdutoModel.buscarPorId(id);
     
-    if (cliente) {
-      res.status(200).json(cliente);
+    if (produtos) {
+      res.status(200).json(produtos);
     } else {
       res.status(404).json({ 
-        mensagem: `cliente ${id} não encontrado` 
+        mensagem: `produtos ${id} não encontrado` 
       });
     }
   } catch (erro) {
     res.status(500).json({ 
-      mensagem: 'Erro ao buscar cliente',
+      mensagem: 'Erro ao buscar produtos',
       erro: erro.message 
     });
   }
@@ -44,26 +44,26 @@ async function buscarPorId(req, res) {
 //post
 async function criar(req, res) {
   try {
-    const {nome, cpf, email, telefone} = req.body;
+    const {nome, preco,estoque,categoria} = req.body;
     
     // Validações
-    if (!nome || !cpf || !email || !telefone ) {
+    if (!nome || !preco ||!estoque || !categoria ) {
       return res.status(400).json({ 
         mensagem: 'Todos os campos são obrigatórios' 
       });
     }
     
-    const novoCliente = await ClienteModel.criar({ 
+    const novoProduto = await ProdutoModel.criar({ 
       nome, 
-      cpf, 
-      email, 
-      telefone
+      preco,
+      estoque,
+      categoria
     });
     
-    res.status(201).json(novoCliente);
+    res.status(201).json(novoProduto);
   } catch (erro) {
     res.status(500).json({ 
-      mensagem: 'Erro ao criar cliente',
+      mensagem: 'Erro ao criar produto',
       erro: erro.message 
     });
   }
@@ -73,7 +73,7 @@ async function criar(req, res) {
 async function atualizar(req, res) {
   try {
     const id = parseInt(req.params.id);
-    const { nome, cpf, email, telefone} = req.body;
+    const { nome, preco, estoque, categoria} = req.body;
     
     if (isNaN(id)) {
       return res.status(400).json({ 
@@ -81,29 +81,29 @@ async function atualizar(req, res) {
       });
     }
     
-    if (!nome || !cpf || !email || !telefone) {
+    if (!nome || !preco || !estoque || !categoria) {
       return res.status(400).json({ 
         mensagem: 'Todos os campos são obrigatórios' 
       });
     }
     
-    const clienteAtualizado = await ClienteModel.atualizar(id, { 
+    const produtoAtualizado = await ProdutoModel.atualizar(id, { 
       nome, 
-      cpf, 
-      email, 
-      telefone
+      preco,
+      estoque,
+      categoria
     });
     
-    if (clienteAtualizado) {
-      res.status(200).json(clienteAtualizado);
+    if (produtoAtualizado) {
+      res.status(200).json(produtoAtualizado);
     } else {
       res.status(404).json({ 
-        mensagem: `Cliente ${id} não encontrado` 
+        mensagem: `Produto ${id} não encontrado` 
       });
     }
   } catch (erro) {
     res.status(500).json({ 
-      mensagem: 'Erro ao atualizar cliente',
+      mensagem: 'Erro ao atualizar produto',
       erro: erro.message 
     });
   }
@@ -120,20 +120,20 @@ async function deletar(req, res) {
       });
     }
     
-    const deletado = await ClienteModel.deletar(id);
+    const deletado = await ProdutoModel.deletar(id);
     
     if (deletado) {
       res.status(200).json({ 
-        mensagem: `Cliente ${id} removido com sucesso` 
+        mensagem:`Produto ${id} removido com sucesso` 
       });
     } else {
       res.status(404).json({ 
-        mensagem: `Cliente ${id} não encontrado` 
+        mensagem: `Produto ${id} não encontrado` 
       });
     }
   } catch (erro) {
     res.status(500).json({ 
-      mensagem: 'Erro ao deletar cliente',
+      mensagem: 'Erro ao deletar produto',
       erro: erro.message 
     });
   }
@@ -143,11 +143,11 @@ async function deletar(req, res) {
 async function buscarPorNome(req, res) {
   try {
     const { nome } = req.params;
-    const clientes = await ClienteModel.buscarPorNome(nome);
-    res.status(200).json(clientes);
+    const produto = await ProdutoModel.buscarPorNome(nome);
+    res.status(200).json(produto);
   } catch (erro) {
     res.status(500).json({ 
-      mensagem: 'Erro ao buscar clientes por nome',
+      mensagem: 'Erro ao buscar produto por nome',
       erro: erro.message 
     });
   }
