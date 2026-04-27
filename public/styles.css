@@ -46,8 +46,6 @@
    color: white;
    height: 20rem;
    align-content: center;
-   
-
    }
 
    
@@ -61,4 +59,42 @@
     z-index: -100; /* Fica atrás de tudo */
     background-size: cover;
     height: 100vh;
+}
+
+header{
+    display: flex;
+    justify-content:end;
+    background-color: rgb(113, 5, 95);
+    height: 50px;
+    align-items: center;
+
+    
+     .btn {
+    background-color: rgba(255, 255, 255, 0.6);
+    color: rgb(109, 12, 106);
+    border-radius: 5px;
+     font-size: larger;
+     font-weight: bold;
+     text-decoration: none;
+     border: black solid 3px;
+     width: 200px;
+     align-self: center;
+     padding: 10px;
+     margin-top: 100px;
+     text-align: center;
+     }
+}
+
+footer {
+    background-color: #333333;
+    color: #ffffff;
+    text-align: center;
+    padding: 20px;
+    margin-top: 50px;
+    font-size: 0.9em;
+    
+    a{
+        color:white;
+        font-size: large;
+    }
 }

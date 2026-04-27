@@ -3,7 +3,7 @@ const app = express();
 const produtosRoutes = require('./src/routes/produtosRoutes');  
  
 // Middleware para servir os arquivos estáticos do front-end 
-app.use(express.static('./src/public')); 
+app.use(express.static('./public')); 
  
 // Middleware para interpretar JSON no corpo das requisições 
 app.use(express.json()); 
